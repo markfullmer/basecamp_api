@@ -40,3 +40,9 @@ curl -X POST -d "type=web_server&client_id=your-client-id&redirect_uri=your-redi
 vendor/bin/drush state:set basecamp_api_refresh_token <your token>
 vendor/bin/drush state:set basecamp_api_access_token <your token>
 ```
+
+5. **Important**: by default, this token will not refresh via cron so that development environments don't accidentally invalidate your access token in the production environment. For the token to be refreshed regularly in your production environment, add the following to your `settings.php` or equivalent:
+
+```
+$settings['basecamp_api_do_refresh'] = TRUE;
+```
