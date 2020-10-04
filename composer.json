@@ -1,7 +1,7 @@
 {
   "name": "writecrow/basecamp_api",
   "type": "drupal-module",
-  "description": "Integration for Basecamp API v3",
+  "description": "Drupal integration for Basecamp API v3",
   "keywords": [
     "Drupal"
   ],
