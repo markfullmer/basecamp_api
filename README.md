@@ -21,3 +21,22 @@ $list = $config->get('list');
   
 Basecamp::createTodo($project, $list, $data);
 ```
+
+
+## Proper setup & configuration of the refresh token
+At this time, creating the initial access & refresh token is the purview of the developer (and it is pretty easy -- see https://github.com/basecamp/api/blob/master/sections/authentication.md).
+
+1. Sign in to Basecamp with the user ID that will provide the integration (in most cases, this should be identified as a non-human account so that people know that actions performed are being triggered by the Drupal integration).
+2. Go to https://launchpad.37signals.com/integrations and use the Authorization dialog to generate a 1-time code.
+3. Trade this code for a [long-lived access token & refresh token](https://github.com/basecamp/api/blob/master/sections/authentication.md#oauth-2-from-scratch):
+
+```bash
+curl -X POST -d "type=web_server&client_id=your-client-id&redirect_uri=your-redirect-uri&client_secret=your-client-secret&code=verification-code" https://launchpad.37signals.com/authorization/token
+```
+
+4. Set these tokens in Drupal's non-config-exportable State API:
+
+```
+vendor/bin/drush state:set basecamp_api_refresh_token <your token>
+vendor/bin/drush state:set basecamp_api_access_token <your token>
+```
