@@ -2,6 +2,7 @@
 
 namespace Drupal\basecamp_api;
 
+use function GuzzleHttp\Psr7\str;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
@@ -75,7 +76,7 @@ class Basecamp {
         }
         catch (RequestException $e) {
           if ($e->hasResponse()) {
-            \Drupal::logger('basecamp_api')->error(Psr7\str($e->getResponse()));
+            \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
             return FALSE;
           }
         }
@@ -89,7 +90,7 @@ class Basecamp {
         }
         catch (RequestException $e) {
           if ($e->hasResponse()) {
-            \Drupal::logger('basecamp_api')->error(Psr7\str($e->getResponse()));
+            \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
             return FALSE;
           }
         }
@@ -132,7 +133,7 @@ class Basecamp {
     }
     catch (RequestException $e) {
       if ($e->hasResponse()) {
-        \Drupal::logger('basecamp_api')->error(Psr7\str($e->getResponse()));
+        \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
         return FALSE;
       }
     }
