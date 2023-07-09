@@ -2,7 +2,7 @@
 
 namespace Drupal\basecamp_api;
 
-use function GuzzleHttp\Psr7\str;
+use GuzzleHttp\Psr7\Message;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
@@ -49,7 +49,7 @@ class Basecamp {
    *   "GET" or "POST".
    * @param array $params
    *   Form parameters for POST requests.
-   * 
+   *
    * @return mixed
    *   The Basecamp response in PHP array format, or FALSE if failed.
    */
@@ -76,7 +76,7 @@ class Basecamp {
         }
         catch (RequestException $e) {
           if ($e->hasResponse()) {
-            \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
+            \Drupal::logger('basecamp_api')->error(Message::toString($e->getResponse()));
             return FALSE;
           }
         }
@@ -90,7 +90,7 @@ class Basecamp {
         }
         catch (RequestException $e) {
           if ($e->hasResponse()) {
-            \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
+            \Drupal::logger('basecamp_api')->error(Message::toString($e->getResponse()));
             return FALSE;
           }
         }
@@ -133,7 +133,7 @@ class Basecamp {
     }
     catch (RequestException $e) {
       if ($e->hasResponse()) {
-        \Drupal::logger('basecamp_api')->error(str($e->getResponse()));
+        \Drupal::logger('basecamp_api')->error(Message::toString($e->getResponse()));
         return FALSE;
       }
     }
